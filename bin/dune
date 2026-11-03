@@ -1,0 +1,4 @@
+(executable
+ (public_name commodity_trader)
+ (name main)
+ (libraries commodity_trader))
