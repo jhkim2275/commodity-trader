@@ -1,3 +1,6 @@
 _build/
 *.install
 .DS_Store
+
+# Local planning notes for agents and Wyatt; not shared on GitHub.
+NEXT_STEPS.md

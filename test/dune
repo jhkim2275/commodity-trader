@@ -1,3 +1,6 @@
+; One test executable. Each test_<module>.ml exports a [tests] suite, and
+; test_main.ml runs them all. Run with: dune test
+
 (test
- (name test_commodity_trader)
+ (name test_main)
  (libraries ounit2 commodity_trader))
