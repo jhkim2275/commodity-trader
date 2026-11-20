@@ -1,4 +1,6 @@
+; The terminal version of the game. All timers and input use Lwt.
+
 (executable
  (public_name commodity_trader)
  (name main)
- (libraries commodity_trader))
+ (libraries commodity_trader lwt lwt.unix unix))

@@ -5,22 +5,32 @@
 (generate_opam_files true)
 
 (source
- (github username/reponame))
+ (github jhkim2275/commodity-trader))
 
-(authors "Author Name <author@example.com>")
+(authors
+ "Junghoon Kim"
+ "Connie Lu"
+ "Danny Lin"
+ "Wyatt Cox"
+ "Shreya Anand")
 
-(maintainers "Maintainer Name <maintainer@example.com>")
-
-(license LICENSE)
-
-(documentation https://url/to/documentation)
+(maintainers
+ "Junghoon Kim"
+ "Connie Lu"
+ "Danny Lin"
+ "Wyatt Cox"
+ "Shreya Anand")
 
 (package
  (name commodity_trader)
- (synopsis "A short synopsis")
- (description "A longer description")
- (depends ocaml)
+ (synopsis "A terminal commodity trading game driven by news headlines")
+ (description
+  "Trade wheat, oil, gold, lumber, and cattle against bots as news headlines move prices. Reach as many headlines as possible before the clock runs out. CS 3110 final project.")
+ (depends
+  (ocaml
+   (>= 5.0))
+  (lwt
+   (>= 5.0))
+  (ounit2 :with-test))
  (tags
-  ("add topics" "to describe" your project)))
-
-; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html
+  (game trading cs3110)))

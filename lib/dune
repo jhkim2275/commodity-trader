@@ -1,2 +1,15 @@
+; The pure game core. Keep it free of Lwt/Unix and printing, so every rule is
+; easy to test.
+;
+; Subfolders are only for organization. Every module is still used as
+; Commodity_trader.<Module> (for example Commodity_trader.Bot), with no folder
+; name in it:
+;   core/    shared types, commodities, command parsing
+;   market/  headlines, hidden true values, bots
+;   player/  portfolio and end-of-game settlement
+;   game/    clock and the whole game state
+
+(include_subdirs unqualified)
+
 (library
  (name commodity_trader))
