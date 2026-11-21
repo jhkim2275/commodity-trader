@@ -12,4 +12,6 @@
 (include_subdirs unqualified)
 
 (library
- (name commodity_trader))
+ (name commodity_trader)
+ (instrumentation
+  (backend bisect_ppx)))
