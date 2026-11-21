@@ -1,9 +1,8 @@
 (** The whole state of one run, and how commands change it.
 
-    Owner: Junghoon (MS1 Tasks 1, 3, 9), except [tick_bots] (Wyatt, Task 4).
-    This module ties the others together: it is the only place that should know
-    about all of them. It is pure. Timers, input, and printing live in [bin/].
-*)
+    Owner: Junghoon (MS1 Tasks 1, 3, 9). This module ties the others together:
+    it is the only place that should know about all of them. It is pure. Timers,
+    input, and printing live in [bin/]. *)
 
 type t = {
   duration : Types.duration;  (** The length the player picked. *)

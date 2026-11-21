@@ -1,5 +1,4 @@
-(* Tests for Game. Owner: Junghoon (Tasks 1, 3, 9); Wyatt adds tests for
-   [tick_bots]. *)
+(* Tests for Game. Owner: Junghoon (Tasks 1, 3, 9). *)
 
 open OUnit2
 open Commodity_trader
@@ -78,4 +77,16 @@ let tests =
                  assert_bool "game changed" (g' == g);
                  assert_equal [] msgs)
                [ Command.Status; Help; Quit ]);
+         test "tick_bots ticks each commodity's own bot once" (fun () ->
+             (* Bot behavior is tested in test_bot.ml; this only checks that
+                every bot is ticked with the game's rng and stays with its
+                commodity. *)
+             let g = new_game () in
+             let expected = new_game () in
+             let expected =
+               List.map
+                 (fun (c, b) -> (c, Bot.quote (Bot.tick expected.rng b)))
+                 expected.bots
+             in
+             assert_equal expected (Game.quotes (Game.tick_bots g)));
        ]

@@ -1,5 +1,5 @@
-(* Game state and command handling. Owner: Junghoon (Tasks 1, 3, 9), except
-   [tick_bots] (Wyatt, Task 4). See game.mli for the spec. *)
+(* Game state and command handling. Owner: Junghoon (Tasks 1, 3, 9). See
+   game.mli for the spec. *)
 
 open Types
 
@@ -41,7 +41,9 @@ let create ~seed ~duration ~now =
 
 let quote g c = Bot.quote (List.assoc c g.bots)
 let quotes g = List.map (fun c -> (c, quote g c)) Commodity.all
-let tick_bots g = failwith "TODO (Task 4, Wyatt): Game.tick_bots"
+
+let tick_bots g =
+  { g with bots = List.map (fun (c, b) -> (c, Bot.tick g.rng b)) g.bots }
 
 (* [trade_message verb c qty price] is e.g. "Bought 5 wheat at $6.12 each." *)
 let trade_message verb c qty price =
