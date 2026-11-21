@@ -13,8 +13,7 @@ type t = {
   effects : impact list;
 }
 
-(* Two examples of the format. TODO (Task 3, Junghoon): add at least 8 more (MS1
-   requires 10), including some that lower prices. *)
+(* Every headline in the game. MS1 requires at least 10. *)
 let all =
   [
     {
@@ -33,11 +32,60 @@ let all =
           { commodity = Wheat; pct_change = 0.02 };
         ];
     };
+    {
+      text = "Farmers have a very high crop yield";
+      effects =
+        [
+          { commodity = Wheat; pct_change = -0.20 };
+          { commodity = Cattle; pct_change = -0.04 };
+        ];
+    };
+    {
+      text = "People are looking for assets other than cash";
+      effects = [ { commodity = Gold; pct_change = 0.12 } ];
+    };
+    {
+      text = "Fewer new houses are being built";
+      effects = [ { commodity = Lumber; pct_change = -0.18 } ];
+    };
+    {
+      text = "Disease kills thousands of cattle";
+      effects =
+        [
+          { commodity = Cattle; pct_change = 0.22 };
+          { commodity = Wheat; pct_change = -0.05 };
+        ];
+    };
+    {
+      text = "A huge new oil field starts operating";
+      effects = [ { commodity = Oil; pct_change = -0.15 } ];
+    };
+    {
+      text = "Drought dries up wheat fields";
+      effects =
+        [
+          { commodity = Wheat; pct_change = 0.25 };
+          { commodity = Cattle; pct_change = 0.08 };
+        ];
+    };
+    {
+      text = "A giant new gold mine opens";
+      effects = [ { commodity = Gold; pct_change = -0.12 } ];
+    };
+    {
+      text = "A hurricane destroys thousands of homes";
+      effects = [ { commodity = Lumber; pct_change = 0.20 } ];
+    };
   ]
 
-(* TODO (Task 3, Junghoon): choose a representation for a deck. *)
-type deck = unit
+(* A deck is the headlines not yet shown, top first. *)
+type deck = t list
 
-let new_deck () = failwith "TODO (Task 3, Junghoon): Headline.new_deck"
-let draw d = failwith "TODO (Task 3, Junghoon): Headline.draw"
-let remaining d = failwith "TODO (Task 3, Junghoon): Headline.remaining"
+let new_deck () = all
+
+let draw d =
+  match if d = [] then new_deck () else d with
+  | h :: rest -> (h, rest)
+  | [] -> failwith "Headline.draw: [all] is empty"
+
+let remaining d = List.length d
