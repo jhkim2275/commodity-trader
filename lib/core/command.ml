@@ -18,7 +18,8 @@ let quantity n =
   else None
 
 (* [trade make c n] is [Ok (make com q)] when [c] names a commodity [com] and
-   [n] is a valid quantity [q]. *)
+   [n] is a valid quantity [q]. Otherwise it is [Error msg] naming the bad
+   commodity, or else the bad quantity. *)
 let trade make c n =
   match (Commodity.of_string c, quantity n) with
   | None, _ -> Error ("Unknown commodity: " ^ c)
