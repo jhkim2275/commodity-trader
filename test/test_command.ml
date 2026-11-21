@@ -4,9 +4,9 @@ open OUnit2
 open Commodity_trader
 open Types
 
-(* Buy and sell call [Commodity.of_string], which is still a stub (Shreya). Until
-   it lands, tests that need it are skipped instead of failing. TODO (Connie):
-   once [Commodity.of_string] is merged, remove this guard and
+(* Buy and sell call [Commodity.of_string], which is still a stub (Shreya).
+   Until it lands, tests that need it are skipped instead of failing. TODO
+   (Connie): once [Commodity.of_string] is merged, remove this guard and
    [~needs_of_string] so those tests always run. *)
 let of_string_ready =
   match Commodity.of_string "wheat" with
@@ -47,13 +47,14 @@ let tests =
            [
              ("buy coal 5", Error "Unknown commodity: coal");
              ("sell gold 0", Error "Quantity must be a positive whole number: 0");
-             ("buy gold -1", Error "Quantity must be a positive whole number: -1");
+             ( "buy gold -1",
+               Error "Quantity must be a positive whole number: -1" );
              ( "buy gold 0x10",
                Error "Quantity must be a positive whole number: 0x10" );
              ( "buy gold 99999999999999999999",
                Error
-                 "Quantity must be a positive whole number: 99999999999999999999"
-             );
+                 "Quantity must be a positive whole number: \
+                  99999999999999999999" );
            ];
          parses "empty, incomplete, and unknown input is rejected"
            [

@@ -12,7 +12,9 @@ type t =
    digits only, so inputs like ["-1"], ["+5"], or ["0x10"] are rejected. *)
 let quantity n =
   if String.for_all (fun ch -> '0' <= ch && ch <= '9') n then
-    match int_of_string_opt n with Some q when q > 0 -> Some q | _ -> None
+    match int_of_string_opt n with
+    | Some q when q > 0 -> Some q
+    | _ -> None
   else None
 
 (* [trade make c n] is [Ok (make com q)] when [c] names a commodity [com] and
