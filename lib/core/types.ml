@@ -1,5 +1,3 @@
-(* Shared types. Owner: Shreya (Task 1). See types.mli for the spec. *)
-
 type commodity =
   | Wheat
   | Oil
@@ -19,7 +17,10 @@ type duration =
   | Five_min
   | Ten_min
 
-let string_of_price p = failwith "TODO (Task 1, Shreya): Types.string_of_price"
+let string_of_price p =
+  let sign = if p < 0 then "-" else "" in
+  let a = abs p in
+  Printf.sprintf "%s$%d.%02d" sign (a / 100) (a mod 100)
 
 let string_of_duration = function
   | Two_min -> "2 min"
