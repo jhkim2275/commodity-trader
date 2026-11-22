@@ -88,11 +88,5 @@ let apply (cmd : Command.t) g =
   | Next -> next_day g
   | Status | Help | Quit -> (g, [])
 
-(* Adds up the holdings at the current bid directly instead of calling
-   [Settlement.liquidate], so the turn-based version works without
-   Settlement. *)
 let final_cash g =
-  List.fold_left
-    (fun acc (c, qty) -> acc + (qty * (quote g c).bid))
-    (Portfolio.cash g.portfolio)
-    (Portfolio.holdings g.portfolio)
+  Settlement.liquidate g.portfolio ~sale_price:(fun c -> (quote g c).bid)
