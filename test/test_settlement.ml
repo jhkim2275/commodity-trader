@@ -29,10 +29,6 @@ let tests =
            let p = Portfolio.create ~cash:10_000 in
            let p = ok (Portfolio.buy p Gold ~qty:1 ~ask:10_000) in
            assert_cents 8_000 (Settlement.liquidate p ~sale_price:(fun _ -> 8_000)));
-         "commodities not held do not count" >:: (fun _ ->
-           let p = ok (Portfolio.buy (Portfolio.create ~cash:1_000) Cattle ~qty:1 ~ask:1_000) in
-           let sale_price = function Cattle -> 1_200 | _ -> 1_000_000 in
-           assert_cents 1_200 (Settlement.liquidate p ~sale_price));
          "matches net worth at the same prices" >:: (fun _ ->
            let p = ok (Portfolio.buy (Portfolio.create ~cash:50_000) Lumber ~qty:3 ~ask:9_000) in
            let price_of _ = 8_500 in

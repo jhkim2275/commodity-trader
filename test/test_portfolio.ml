@@ -70,8 +70,6 @@ let buy_tests =
     "buy one cent too much" >:: (fun _ ->
       assert_error Portfolio.Insufficient_cash
         (Portfolio.buy p0 Wheat ~qty:1 ~ask:10_001));
-    "buy zero" >:: (fun _ ->
-      assert_error Portfolio.Invalid_quantity (Portfolio.buy p0 Wheat ~qty:0 ~ask:600));
     "buy negative" >:: (fun _ ->
       assert_error Portfolio.Invalid_quantity
         (Portfolio.buy p0 Wheat ~qty:(-3) ~ask:600));

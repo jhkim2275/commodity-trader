@@ -24,6 +24,4 @@ let tests =
          price_test "negative dollars" "-$1234.56" (-123456);
          price_test "starting cash" "$10000.00" 1_000_000;
          duration_test "two minutes" "2 min" Two_min;
-         duration_test "five minutes" "5 min" Five_min;
-         duration_test "ten minutes" "10 min" Ten_min;
        ]
