@@ -1,17 +1,17 @@
 (* Integration tests: whole runs that use every module together through [Game],
-   the way the terminal app does. Owner: Connie. Each module's own behavior is
-   tested in its test_<module>.ml; these check that the pieces connect. *)
+   the way the terminal app does. Each module's own behavior is tested in its
+   test_<module>.ml; these check that the pieces connect. *)
 
 open OUnit2
 open Commodity_trader
 open Types
 
-(* A fresh 2 minute game with a fixed seed, started at time 0. *)
+(** [new_game ()] is a fresh 2 minute game with a fixed seed, at time 0. *)
 let new_game () = Game.create ~seed:42 ~duration:Two_min ~now:0.
 
-(* [play g lines] types each line in [lines] into [g], like a player at the
-   prompt: [Command.parse] the line, then [Game.apply] the command. Fails the
-   test if a line doesn't parse. *)
+(** [play g lines] types each line in [lines] into [g], like a player at the
+    prompt: [Command.parse] the line, then [Game.apply] the command. Fails the
+    test if a line doesn't parse. *)
 let play g lines =
   List.fold_left
     (fun g line ->
@@ -20,8 +20,8 @@ let play g lines =
       | Error msg -> assert_failure msg)
     g lines
 
-(* [check_quotes g] fails unless every quote is valid ([0 < bid < ask]) and
-   inside [Bot.max_deviation] of that commodity's hidden market value. *)
+(** [check_quotes g] fails unless every quote is valid ([0 < bid < ask]) and
+    inside [Bot.max_deviation] of that commodity's hidden market value. *)
 let check_quotes (g : Game.t) =
   List.iter
     (fun (c, { bid; ask }) ->

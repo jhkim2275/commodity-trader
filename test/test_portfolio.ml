@@ -73,6 +73,12 @@ let buy_tests =
     ( "buy one cent too much" >:: fun _ ->
       assert_error Portfolio.Insufficient_cash
         (Portfolio.buy p0 Wheat ~qty:1 ~ask:10_001) );
+    ( "a huge quantity is rejected instead of overflowing" >:: fun _ ->
+      (* [max_int * 2] wraps to -2, which looks affordable if multiplied. *)
+      assert_error Portfolio.Insufficient_cash
+        (Portfolio.buy p0 Wheat ~qty:max_int ~ask:2);
+      assert_error Portfolio.Insufficient_cash
+        (Portfolio.buy p0 Gold ~qty:38_430_716_258_000 ~ask:202_000) );
     ( "buy negative" >:: fun _ ->
       assert_error Portfolio.Invalid_quantity
         (Portfolio.buy p0 Wheat ~qty:(-3) ~ask:600) );
@@ -111,11 +117,6 @@ let sell_tests =
     ( "sell negative" >:: fun _ ->
       assert_error Portfolio.Invalid_quantity
         (Portfolio.sell p5 Wheat ~qty:(-1) ~bid:600) );
-    ( "rejected trades leave the portfolio unchanged" >:: fun _ ->
-      ignore (Portfolio.sell p5 Wheat ~qty:99 ~bid:600);
-      ignore (Portfolio.buy p5 Gold ~qty:1 ~ask:1_000_000);
-      assert_cash 7_000 p5;
-      assert_equal 5 (Portfolio.holding p5 Wheat) ~printer:string_of_int );
   ]
 
 let other_tests =

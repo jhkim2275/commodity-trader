@@ -1,7 +1,7 @@
 (** The hidden "true value" of each commodity for the current day.
 
-    Owner: Junghoon (MS1 Task 3). The player never sees these numbers. Bots
-    quote bids and asks around them (see [Bot]). *)
+    The player never sees these numbers. Bots quote bids and asks around them
+    (see [Bot]). *)
 
 type t
 

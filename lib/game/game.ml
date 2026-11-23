@@ -1,6 +1,3 @@
-(* Game state and command handling. Owner: Junghoon (Tasks 1, 3, 9). See
-   game.mli for the spec. *)
-
 open Types
 
 type t = {
@@ -45,19 +42,19 @@ let quotes g = List.map (fun c -> (c, quote g c)) Commodity.all
 let tick_bots g =
   { g with bots = List.map (fun (c, b) -> (c, Bot.tick g.rng b)) g.bots }
 
-(* [trade_message verb c qty price] is e.g. "Bought 5 wheat at $6.12 each." *)
+(** [trade_message verb c qty price] is e.g. "Bought 5 wheat at $6.12 each." *)
 let trade_message verb c qty price =
   Printf.sprintf "%s %d %s at %s each." verb qty (Commodity.to_string c)
     (string_of_price price)
 
-(* [after_trade g c qty price verb result] is the game after a buy or sell: the
-   new portfolio on success, or [g] unchanged with the reason on failure. *)
+(** [after_trade g c qty price verb result] is the game after a buy or sell: the
+    new portfolio on success, or [g] unchanged with the reason on failure. *)
 let after_trade g c qty price verb = function
   | Ok portfolio -> ({ g with portfolio }, [ trade_message verb c qty price ])
   | Error e -> (g, [ Portfolio.error_to_string e ])
 
-(* [next_day g] draws the next headline, moves the hidden market, and re-centers
-   every bot on its commodity's new true value. *)
+(** [next_day g] draws the next headline, moves the hidden market, and
+    re-centers every bot on its commodity's new true value. *)
 let next_day g =
   let headline, deck = Headline.draw g.deck in
   let market = Market.apply_headline g.rng headline g.market in

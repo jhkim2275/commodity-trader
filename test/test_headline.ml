@@ -1,9 +1,9 @@
-(* Tests for Headline. Owner: Junghoon (Task 3). *)
+(* Tests for Headline. *)
 
 open OUnit2
 open Commodity_trader
 
-(* [draw_n n d] draws [n] headlines from [d] and returns the deck left over. *)
+(** [draw_n n d] draws [n] headlines from [d] and returns the deck left over. *)
 let rec draw_n n d = if n = 0 then d else draw_n (n - 1) (snd (Headline.draw d))
 
 let tests =

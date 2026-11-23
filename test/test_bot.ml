@@ -4,11 +4,11 @@ open OUnit2
 open Commodity_trader
 open Types
 
-(* A random state with a fixed seed, so tests repeat exactly. *)
+(** [rng seed] is a random state seeded with [seed], so tests repeat exactly. *)
 let rng seed = Random.State.make [| seed |]
 
-(* [check_quote b] fails unless the bot's quote has 0 < bid < ask and both are
-   within [Bot.max_deviation] of the true value. *)
+(** [check_quote b] fails unless the bot's quote has 0 < bid < ask and both are
+    within [Bot.max_deviation] of the true value. *)
 let check_quote b =
   let { bid; ask } = Bot.quote b in
   let tv = float_of_int (Bot.true_value b) in
@@ -20,15 +20,15 @@ let check_quote b =
   assert_bool ("ask in band: " ^ show)
     (float_of_int ask <= tv *. (1. +. Bot.max_deviation))
 
-(* [check_centered tv b] fails unless [b] quotes around [tv]: bid < tv < ask. *)
+(** [check_centered tv b] fails unless [b] has bid < [tv] < ask. *)
 let check_centered tv b =
   assert_equal tv (Bot.true_value b) ~printer:string_of_int;
   let { bid; ask } = Bot.quote b in
   assert_bool "bid below true value" (bid < tv);
   assert_bool "ask above true value" (ask > tv)
 
-(* [quotes n seed tv] is the quotes of a new bot with true value [tv] after each
-   of [n] ticks. *)
+(** [quotes n seed tv] is the quotes of a new bot with true value [tv] after
+    each of [n] ticks. *)
 let quotes n seed tv =
   let r = rng seed in
   let rec go n b acc =
@@ -39,12 +39,11 @@ let quotes n seed tv =
   in
   go n (Bot.create r ~true_value:tv) []
 
-(* True values to tick through: every starting value, plus 10 cents, the
-   cheapest value whose band still fits a spread (so the mid often hits the
-   edges of the band and gets clamped). *)
+(** True values to tick through: every starting value, plus 10 cents, the
+    cheapest value whose band still fits a spread (so the mid often hits the
+    edges of the band and gets clamped). *)
 let tick_values = 10 :: List.map Commodity.starting_value Commodity.all
 
-(* Every Bot test. *)
 let tests =
   "Bot"
   >::: [

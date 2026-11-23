@@ -1,10 +1,10 @@
 (** A bot that quotes a bid and an ask for ONE commodity around its hidden true
     value.
 
-    We start with one bot per commodity, so the player trades directly at this
-    bot's quote. The bot only changes when [tick] or [reset] is called; the
-    1-second timer that calls [tick] lives in [bin/loop.ml] (Lwt), which keeps
-    this module pure and testable with a seeded [Random.State.t]. *)
+    There is one bot per commodity, so the player trades directly at this bot's
+    quote. The bot only changes when [tick] or [reset] is called; the 1-second
+    timer that calls [tick] lives in [bin/loop.ml] (Lwt), which keeps this
+    module pure and testable with a seeded [Random.State.t]. *)
 
 type t
 
@@ -25,7 +25,7 @@ val reset : Random.State.t -> true_value:Types.price -> t -> t
 
 val true_value : t -> Types.price
 (** [true_value b] is the value the bot is quoting around. Hidden from the
-    player; exposed for tests and settlement. *)
+    player; exposed for tests. *)
 
 val quote : t -> Types.quote
 (** [quote b] is the bot's current bid and ask. Invariants: [0 < bid < ask], and

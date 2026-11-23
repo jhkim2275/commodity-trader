@@ -1,5 +1,3 @@
-(* Game clock. Owner: Connie (Task 5). See clock.mli for the spec. *)
-
 (* The time the run ends, in the same seconds as [~now]. *)
 type t = float
 

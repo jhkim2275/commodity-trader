@@ -1,8 +1,7 @@
 (** The whole state of one run, and how commands change it.
 
-    Owner: Junghoon (MS1 Tasks 1, 3, 9). This module ties the others together:
-    it is the only place that should know about all of them. It is pure. Timers,
-    input, and printing live in [bin/]. *)
+    This module ties the others together: it is the only place that should know
+    about all of them. It is pure; timers, input, and printing are in [bin/]. *)
 
 type t = {
   duration : Types.duration;  (** The length the player picked. *)
@@ -15,7 +14,9 @@ type t = {
   portfolio : Portfolio.t;  (** Player's cash and holdings. *)
   clock : Clock.t;  (** Countdown to the end of the run. *)
   rng : Random.State.t;
-      (** All randomness comes from here, so a fixed seed replays exactly. *)
+      (** All randomness comes from here. A fixed seed gives the same results
+          for the same sequence of calls. In a live game the bot ticker runs on
+          a timer, so how many ticks happen between commands can vary. *)
 }
 
 val starting_cash : Types.price

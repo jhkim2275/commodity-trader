@@ -1,7 +1,7 @@
 (** Ending a run: why it ended, and selling every holding for cash.
 
-    Owner: Shreya (MS1 Task 9). When a run ends, every holding is sold at the
-    current bid, so the player finishes with only cash. *)
+    When a run ends, every holding is sold at the current bid, so the player
+    finishes with only cash. *)
 
 (** Why a run ended. *)
 type reason =
