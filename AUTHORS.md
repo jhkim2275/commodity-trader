@@ -14,5 +14,4 @@
   AI-assisted code was reviewed by its owner and the team before merging.
 - **Lwt documentation:** https://ocsigen.org/lwt/ (promises, timers, and
   concurrent input)
-- **OUnit2 documentation:** used for writing test suites.
 - **CS 3110 textbook:** *OCaml Programming: Correct + Efficient + Beautiful*.
