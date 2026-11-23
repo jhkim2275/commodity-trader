@@ -1,11 +1,11 @@
-(* Tests for Market. Owner: Junghoon (Task 3). *)
+(* Tests for Market. *)
 
 open OUnit2
 open Commodity_trader
 open Types
 
-(* [lumber_after pct] is Lumber's true value after a headline that moves only
-   Lumber by [pct], starting from [Market.init ()]. *)
+(** [lumber_after pct] is Lumber's true value after a headline that moves only
+    Lumber by [pct], starting from [Market.init ()]. *)
 let lumber_after pct =
   let h : Headline.t =
     { text = "Test"; effects = [ { commodity = Lumber; pct_change = pct } ] }

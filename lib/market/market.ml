@@ -1,14 +1,11 @@
-(* Hidden daily true values. Owner: Junghoon (Task 3). See market.mli for the
-   spec. *)
-
 (* Each commodity paired with its hidden true value, in cents. *)
 type t = (Types.commodity * Types.price) list
 
 let init () = List.map (fun c -> (c, Commodity.starting_value c)) Commodity.all
 let true_value m c = List.assoc c m
 
-(* Largest daily random move, as a fraction, for a commodity the headline does
-   not mention: [0.03] is up to 3% either way. *)
+(** Largest daily random move, as a fraction, for a commodity the headline does
+    not mention: [0.03] is up to 3% either way. *)
 let max_drift = 0.03
 
 let apply_headline rng (h : Headline.t) m =

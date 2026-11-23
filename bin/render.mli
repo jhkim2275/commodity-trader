@@ -1,8 +1,6 @@
 (** Turning game state into text for the terminal.
 
-    Owner: Danny (MS1 Task 1). Teammates who need something new shown ask Danny
-    to add it here. Every function returns a string; [Loop] does the printing.
-*)
+    Every function returns a string; [Loop] does the printing. *)
 
 open Commodity_trader
 

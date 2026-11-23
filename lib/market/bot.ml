@@ -1,6 +1,4 @@
-(* One quoting bot per commodity. See bot.mli for the spec.
-
-   How it works: the bot keeps a private "mid" price. Its bid is a little below
+(* How it works: the bot keeps a private "mid" price. Its bid is a little below
    the mid and its ask a little above it (the spread). Every tick the mid takes
    a small random step, with a slight pull back toward the true value, and is
    then clamped so that the bid and ask both stay inside the allowed band around
@@ -20,29 +18,29 @@ type t = {
 
 let max_deviation = 0.20
 
-(* Half of the bid-ask spread, as a fraction of the true value (so the full
-   spread is about 2%). *)
+(** Half of the bid-ask spread, as a fraction of the true value (so the full
+    spread is about 2%). *)
 let half_spread_frac = 0.01
 
-(* Largest random step the mid can take in one tick, as a fraction of the true
-   value. *)
+(** Largest random step the mid can take in one tick, as a fraction of the true
+    value. *)
 let max_step_frac = 0.02
 
-(* Each tick, the mid moves 1/[pull_divisor] of the way back toward the true
-   value, so it drifts around the true value instead of sticking at the edges of
-   the band. *)
+(** Each tick, the mid moves 1/[pull_divisor] of the way back toward the true
+    value, so it drifts around the true value instead of sticking at the edges
+    of the band. *)
 let pull_divisor = 10
 
-(* [frac_of tv f] is [f] of [tv] in whole cents, at least 1 cent. *)
+(** [frac_of tv f] is [f] of [tv] in whole cents, at least 1 cent. *)
 let frac_of tv f = max 1 (int_of_float (float_of_int tv *. f))
 
-(* [half_spread b] is half of [b]'s bid-ask spread, in cents. *)
+(** [half_spread b] is half of [b]'s bid-ask spread, in cents. *)
 let half_spread b = frac_of b.true_value half_spread_frac
 
-(* The lowest and highest mid that keep the bid and ask inside the band
-   [true_value * (1 - max_deviation), true_value * (1 + max_deviation)]. When
-   the true value is only a few cents, the band is too narrow to fit a spread,
-   and [None] is returned. *)
+(** The lowest and highest mid that keep the bid and ask inside the band
+    [true_value * (1 - max_deviation), true_value * (1 + max_deviation)]. When
+    the true value is only a few cents, the band is too narrow to fit a spread,
+    and [None] is returned. *)
 let mid_range b =
   let tv = float_of_int b.true_value in
   let half = half_spread b in
@@ -50,8 +48,8 @@ let mid_range b =
   let hi = int_of_float (Float.floor (tv *. (1. +. max_deviation))) - half in
   if lo <= hi then Some (lo, hi) else None
 
-(* [clamp b mid] is [mid] moved inside [mid_range b], or the true value itself
-   when no mid fits. *)
+(** [clamp b mid] is [mid] moved inside [mid_range b], or the true value itself
+    when no mid fits. *)
 let clamp b mid =
   match mid_range b with
   | Some (lo, hi) -> max lo (min hi mid)

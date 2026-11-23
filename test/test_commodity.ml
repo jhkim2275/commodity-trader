@@ -17,9 +17,7 @@ let parse_test name expected s =
 let tests =
   "Commodity"
   >::: [
-         ( "all is in display order" >:: fun _ ->
-           assert_equal [ Wheat; Oil; Gold; Lumber; Cattle ] Commodity.all );
-         ( "to_string" >:: fun _ ->
+         ( "to_string names every commodity in display order" >:: fun _ ->
            assert_equal
              [ "wheat"; "oil"; "gold"; "lumber"; "cattle" ]
              (List.map Commodity.to_string Commodity.all)

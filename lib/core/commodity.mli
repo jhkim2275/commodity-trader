@@ -1,6 +1,4 @@
-(** Helpers for the five commodities: names, parsing, and starting values.
-
-    Owner: Shreya (MS1 Task 1). *)
+(** Helpers for the five commodities: names, parsing, and starting values. *)
 
 type t = Types.commodity
 

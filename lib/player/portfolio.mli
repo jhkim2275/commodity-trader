@@ -1,7 +1,7 @@
 (** The player's cash and holdings, and the buy/sell accounting.
 
-    Owner: Shreya (MS1 Task 2). Every function is pure: a rejected trade returns
-    [Error] and the old portfolio is unchanged. *)
+    Every function is pure: a rejected trade returns [Error] and the old
+    portfolio is unchanged. *)
 
 type t
 (** A player's cash plus how many whole units of each commodity they hold. *)
@@ -33,8 +33,7 @@ val sell :
 (** [sell p c ~qty ~bid] sells [qty] units of [c] at [bid] each. *)
 
 val net_worth : t -> (Types.commodity -> Types.price) -> Types.price
-(** [net_worth p price_of] is cash plus each holding valued at [price_of c] (the
-    team still has to decide whether that is the bid or the true value). *)
+(** [net_worth p price_of] is cash plus each holding valued at [price_of c]. *)
 
 val error_to_string : error -> string
 (** [error_to_string e] is a message to show the player. *)

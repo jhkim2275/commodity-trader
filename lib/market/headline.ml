@@ -1,6 +1,3 @@
-(* Headlines and the deck. Owner: Junghoon (Task 3). See headline.mli for the
-   spec. *)
-
 open Types
 
 type impact = {
@@ -13,7 +10,6 @@ type t = {
   effects : impact list;
 }
 
-(* Every headline in the game. MS1 requires at least 10. *)
 let all =
   [
     {

@@ -1,7 +1,7 @@
 (** Parsing what the player types into commands.
 
-    Owner: Connie (MS1 Task 1). Add a constructor here when a feature needs a
-    new command, then handle it in [Game.apply] or [bin/loop.ml]. *)
+    Add a constructor here when a feature needs a new command, then handle it in
+    [Game.apply] or [bin/loop.ml]. *)
 
 type t =
   | Buy of Types.commodity * int  (** [buy wheat 5]: buy 5 at the ask. *)
@@ -13,6 +13,6 @@ type t =
 
 val parse : string -> (t, string) result
 (** [parse s] turns one line of input into a command. Words are separated by
-    spaces and case is ignored. Quantities must be positive whole numbers.
-    Returns [Error msg] with a message to show the player for empty, unknown, or
-    malformed input. *)
+    spaces or tabs, and case is ignored. Quantities must be positive whole
+    numbers. Returns [Error msg] with a message to show the player for empty,
+    unknown, or malformed input. *)

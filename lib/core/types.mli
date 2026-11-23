@@ -1,7 +1,4 @@
-(** Shared types used by every module in the game.
-
-    Owner: Shreya (MS1 Task 1). Changing a type here affects everyone, so agree
-    on changes as a team first. *)
+(** Shared types used by every module in the game. *)
 
 (** The five tradable commodities. *)
 type commodity =

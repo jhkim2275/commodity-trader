@@ -24,14 +24,14 @@ let update_holding p c f =
       List.map (fun (c', n) -> if c' = c then (c', f n) else (c', n)) p.held;
   }
 
+(* [buy] compares [qty] to [cash / ask] instead of [qty * ask] to [cash]: for a
+   huge [qty], [qty * ask] overflows and can wrap to a negative cost. *)
 let buy p c ~qty ~ask =
   if qty <= 0 then Error Invalid_quantity
+  else if ask > 0 && qty > p.cash / ask then Error Insufficient_cash
   else
-    let cost = qty * ask in
-    if cost > p.cash then Error Insufficient_cash
-    else
-      let p' = update_holding p c (fun n -> n + qty) in
-      Ok { p' with cash = p.cash - cost }
+    let p' = update_holding p c (fun n -> n + qty) in
+    Ok { p' with cash = p.cash - (qty * ask) }
 
 let sell p c ~qty ~bid =
   if qty <= 0 then Error Invalid_quantity
