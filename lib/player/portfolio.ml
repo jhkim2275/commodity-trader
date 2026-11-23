@@ -11,19 +11,17 @@ type error =
   | Insufficient_holdings
 
 let create ~cash = { cash; held = List.map (fun c -> (c, 0)) Commodity.all }
-
 let cash p = p.cash
-
 let holding p c = List.assoc c p.held
-
 let holdings p = List.filter (fun (_, n) -> n <> 0) p.held
 
-(** [update_holding p c f] is [p] after one trade of [c]: the number of units
-    of [c] changes from [n] to [f n] and everything else stays the same. *)
+(** [update_holding p c f] is [p] after one trade of [c]: the number of units of
+    [c] changes from [n] to [f n] and everything else stays the same. *)
 let update_holding p c f =
   {
     p with
-    held = List.map (fun (c', n) -> if c' = c then (c', f n) else (c', n)) p.held;
+    held =
+      List.map (fun (c', n) -> if c' = c then (c', f n) else (c', n)) p.held;
   }
 
 let buy p c ~qty ~ask =

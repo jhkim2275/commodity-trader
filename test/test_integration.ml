@@ -60,8 +60,7 @@ let tests =
                  let g = Game.tick_bots (Game.tick_bots g) in
                  check_quotes g;
                  g)
-               (new_game ())
-               (List.init days Fun.id)
+               (new_game ()) (List.init days Fun.id)
            in
            assert_equal days g.headlines_reached;
            assert_equal (Some (List.hd Headline.all)) g.headline );
@@ -73,6 +72,7 @@ let tests =
                assert_equal secs (Clock.remaining g.clock ~now:50.);
                assert_bool "expired early"
                  (not (Clock.expired g.clock ~now:(50. +. secs -. 1.)));
-               assert_bool "not expired" (Clock.expired g.clock ~now:(50. +. secs)))
+               assert_bool "not expired"
+                 (Clock.expired g.clock ~now:(50. +. secs)))
              [ Two_min; Five_min; Ten_min ] );
        ]
