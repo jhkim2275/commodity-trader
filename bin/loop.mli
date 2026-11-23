@@ -1,7 +1,7 @@
 (** The live game loop, built on Lwt.
 
-    Owner: Wyatt (MS1 Tasks 4, 5). Three Lwt promises run at once, and the run
-    ends as soon as one of them finishes:
+    Three Lwt promises run at once, and the run ends as soon as one of them
+    finishes:
     - the input reader, which parses and runs commands as they are typed;
     - the bot ticker, which moves quotes every [tick_interval] seconds;
     - the deadline watcher, which ends the run when the clock expires.
@@ -17,6 +17,12 @@ val tick_interval : float
 val now : unit -> float
 (** The current wall-clock time in seconds. *)
 
+val safe_text : (unit -> string) -> string
+(** [safe_text f] is [f ()], or a "Not implemented yet" note if [f] reaches a
+    teammate's unfinished stub ([Failure "TODO ..."]). This lets the game run
+    while parts are still being written. *)
+
 val run : Game.t ref -> Settlement.reason Lwt.t
 (** [run game] plays until the player quits, input ends, or time runs out, and
-    resolves to the reason the run ended. *)
+    resolves to the reason the run ended. Bot quotes keep moving while the
+    player is typing. *)
