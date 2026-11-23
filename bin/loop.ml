@@ -53,7 +53,17 @@ let respond game (cmd : Command.t) =
       match Game.apply cmd !game with
       | g, messages ->
           game := g;
-          if cmd = Next then messages @ [ status game ] else messages
+          (* After a new headline, show the new prices and holdings. Not the
+             full status, which would print the headline a second time. *)
+          if cmd = Next then
+            messages
+            @ [
+                "";
+                safe_text (fun () -> Render.market !game);
+                "";
+                safe_text (fun () -> Render.portfolio !game);
+              ]
+          else messages
       | exception Failure msg -> [ not_implemented msg ])
 
 (* [Command.parse line], turning an unfinished stub into an error message. *)
