@@ -1,8 +1,7 @@
 (** The whole state of one run, and how commands change it.
 
     This module ties the others together: it is the only place that should know
-    about all of them. It is pure. Timers, input, and printing live in [bin/].
-*)
+    about all of them. It is pure; timers, input, and printing are in [bin/]. *)
 
 type t = {
   duration : Types.duration;  (** The length the player picked. *)
