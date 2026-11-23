@@ -1,6 +1,7 @@
 type reason =
   | Time_up
   | Player_quit
+
 let reason_to_string = function
   | Time_up -> "Time ran out."
   | Player_quit -> "You ended the run."

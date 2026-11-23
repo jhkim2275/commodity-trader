@@ -17,4 +17,5 @@ let () =
            Test_clock.tests;
            Test_settlement.tests;
            Test_game.tests;
+           Test_integration.tests;
          ])
