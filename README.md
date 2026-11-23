@@ -11,7 +11,7 @@ Team **Traders**, CS 3110. See [AUTHORS.md](AUTHORS.md).
 Install the dependencies once:
 
 ```bash
-opam install dune lwt ounit2
+opam install dune lwt ounit2 bisect_ppx
 ```
 
 Then:
@@ -27,6 +27,21 @@ dune exec commodity_trader
 ```bash
 dune test
 ```
+
+## Test coverage
+
+Run the tests with [bisect_ppx](https://github.com/aantron/bisect_ppx), then
+make a report. Use `dune exec` rather than `dune test`, because `dune test`
+runs in a sandbox and discards the coverage files.
+
+```bash
+dune exec --instrument-with bisect_ppx test/test_main.exe
+bisect-ppx-report summary --per-file
+bisect-ppx-report html
+```
+
+`summary` prints coverage per file. `html` writes a line-by-line report to
+`_coverage/index.html`.
 
 ## How the game plays
 

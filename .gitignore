@@ -4,3 +4,7 @@ _build/
 
 # Local planning notes for agents and Wyatt; not shared on GitHub.
 NEXT_STEPS.md
+
+# Coverage output from bisect_ppx
+bisect*.coverage
+_coverage/
