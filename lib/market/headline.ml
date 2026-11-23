@@ -83,9 +83,8 @@ type deck = t list
 
 let new_deck () = all
 
-let draw d =
-  match if d = [] then new_deck () else d with
+let rec draw = function
   | h :: rest -> (h, rest)
-  | [] -> failwith "Headline.draw: [all] is empty"
+  | [] -> draw (new_deck ())
 
 let remaining d = List.length d
