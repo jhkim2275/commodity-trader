@@ -26,7 +26,7 @@ let tests =
          parses "buy and sell take a commodity and a quantity"
            [
              ("buy wheat 5", Ok (Command.Buy (Wheat, 5)));
-             ("  SELL   Oil  12 ", Ok (Command.Sell (Oil, 12)));
+             ("  SELL   Oil  90 ", Ok (Command.Sell (Oil, 90)));
            ];
          parses "bad commodities and quantities are rejected"
            [
