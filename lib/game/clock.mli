@@ -1,8 +1,8 @@
 (** The game clock: a countdown to the end of the run.
 
-    Owner: Connie (MS1 Task 5). The clock never reads the system time itself.
-    Every function takes [~now] (seconds, e.g. from [Unix.gettimeofday]), so
-    tests can use a fake, controllable time. *)
+    The clock never reads the system time itself. Every function takes [~now]
+    (seconds, e.g. from [Unix.gettimeofday]), so tests can use a fake,
+    controllable time. *)
 
 type t
 

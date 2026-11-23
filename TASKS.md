@@ -29,19 +29,11 @@ The terminal app in `bin/` runs those rules live with Lwt.
 
 ## Working on your part
 
-This is only a skeleton RIGHT NOW
-
 - Each `.mli` file is the spec and the contract between teammates. Read it
-  before you write the matching `.ml`. Discuss any change to an `.mli` with
+  before you change the matching `.ml`. Discuss any change to an `.mli` with
   the team first, since other modules depend on it.
-- In each `.ml`, every function body is a stub:
-  `failwith "TODO (Task N, Name): ..."`. Search for `TODO` to find yours.
-- Where a type is hidden in the `.mli` (e.g. `Portfolio.t`), the `.ml` has a
-  placeholder `type t = unit`. Replace it with the representation you choose.
-- Each `test/test_<module>.ml` has an empty `tests` list. Add your tests
-  there.
-- `dune build` and `dune test` pass with the stubs. `dune exec` will not play
-  a game until the stubs are filled in.
+- Each `test/test_<module>.ml` holds that module's tests. Run them all with
+  `dune test`, and play the game with `dune exec commodity_trader`.
 - Prices are whole cents (`int`).
 - Randomness always comes from a `Random.State.t` passed in, so tests can
   use a fixed seed and get the same result every time.

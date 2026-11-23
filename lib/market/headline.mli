@@ -1,7 +1,7 @@
 (** News headlines and the deck they are drawn from.
 
-    Owner: Junghoon (MS1 Task 3). A headline carries the numbers that move the
-    hidden true value of each commodity it mentions. *)
+    A headline carries the numbers that move the hidden true value of each
+    commodity it mentions. *)
 
 type impact = {
   commodity : Types.commodity;

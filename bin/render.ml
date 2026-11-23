@@ -1,5 +1,3 @@
-(* Terminal text. Owner: Danny (Task 1). See render.mli for the spec. *)
-
 open Commodity_trader
 
 let welcome =
@@ -29,7 +27,7 @@ let time_left secs =
   let total = if not (secs > 0.) then 0 else int_of_float (Float.ceil secs) in
   Printf.sprintf "%d:%02d" (total / 60) (total mod 60)
 
-(* [row name bid ask] is one line of the market table. *)
+(** [row name bid ask] is one line of the market table. *)
 let row name bid ask = Printf.sprintf "  %-8s %10s %10s" name bid ask
 
 (* Shows only the bots' quotes, never the hidden true values. *)
@@ -63,7 +61,7 @@ let portfolio (g : Game.t) =
     (("Cash: " ^ Types.string_of_price (Portfolio.cash g.portfolio))
     :: (if lines = [] then [ "Holdings: none" ] else "Holdings:" :: lines))
 
-(* [headline_line g] is today's headline, or a hint to type next on day 0. *)
+(** [headline_line g] is today's headline, or a hint to type next on day 0. *)
 let headline_line (g : Game.t) =
   match g.headline with
   | None -> "No headline yet. Type next for the first one."

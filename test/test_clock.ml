@@ -1,10 +1,10 @@
-(* Tests for Clock. Owner: Connie (Task 5). *)
+(* Tests for Clock. *)
 
 open OUnit2
 open Commodity_trader
 open Types
 
-(* A 2 minute clock started at time 100, so its deadline is 220. *)
+(** A 2 minute clock started at time 100, so its deadline is 220. *)
 let clock = Clock.create Two_min ~now:100.
 
 let tests =

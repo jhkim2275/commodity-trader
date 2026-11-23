@@ -17,13 +17,11 @@ let parse_test name expected s =
 let tests =
   "Commodity"
   >::: [
-         "all is in display order" >:: (fun _ ->
-           assert_equal [ Wheat; Oil; Gold; Lumber; Cattle ] Commodity.all);
-         "to_string" >:: (fun _ ->
+         ( "to_string names every commodity in display order" >:: fun _ ->
            assert_equal
              [ "wheat"; "oil"; "gold"; "lumber"; "cattle" ]
              (List.map Commodity.to_string Commodity.all)
-             ~printer:(String.concat ", "));
+             ~printer:(String.concat ", ") );
          parse_test "lowercase" (Some Wheat) "wheat";
          parse_test "capitalized" (Some Oil) "Oil";
          parse_test "uppercase with spaces" (Some Gold) "  GOLD  ";
@@ -32,15 +30,17 @@ let tests =
          parse_test "empty string" None "";
          parse_test "only spaces" None "   ";
          parse_test "space inside the word" None "cat tle";
-         "of_string inverts to_string" >:: (fun _ ->
+         ( "of_string inverts to_string" >:: fun _ ->
            List.iter
              (fun c ->
                assert_equal (Some c)
                  (Commodity.of_string (Commodity.to_string c))
                  ~printer:opt_printer)
-             Commodity.all);
-         "starting values are positive" >:: (fun _ ->
+             Commodity.all );
+         ( "starting values are positive" >:: fun _ ->
            List.iter
-             (fun c -> assert_bool (Commodity.to_string c) (Commodity.starting_value c > 0))
-             Commodity.all);
+             (fun c ->
+               assert_bool (Commodity.to_string c)
+                 (Commodity.starting_value c > 0))
+             Commodity.all );
        ]

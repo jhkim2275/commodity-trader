@@ -1,11 +1,11 @@
-(* Tests for Command. Owner: Connie (Task 1). *)
+(* Tests for Command. *)
 
 open OUnit2
 open Commodity_trader
 open Types
 
-(* [parses name cases] is a test that [Command.parse input] gives [expected] for
-   every [(input, expected)] in [cases]. *)
+(** [parses name cases] is a test that [Command.parse input] gives [expected]
+    for every [(input, expected)] in [cases]. *)
 let parses name cases =
   name >:: fun _ ->
   List.iter
@@ -27,6 +27,7 @@ let tests =
            [
              ("buy wheat 5", Ok (Command.Buy (Wheat, 5)));
              ("  SELL   Oil  12 ", Ok (Command.Sell (Oil, 12)));
+             ("buy\twheat \t5", Ok (Command.Buy (Wheat, 5)));
            ];
          parses "bad commodities and quantities are rejected"
            [

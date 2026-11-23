@@ -1,5 +1,3 @@
-(* Command parsing. Owner: Connie (Task 1). See command.mli for the spec. *)
-
 type t =
   | Buy of Types.commodity * int
   | Sell of Types.commodity * int
@@ -8,8 +6,8 @@ type t =
   | Help
   | Quit
 
-(* [quantity n] is [Some q] if [n] is a positive whole number written with
-   digits only, so inputs like ["-1"], ["+5"], or ["0x10"] are rejected. *)
+(** [quantity n] is [Some q] if [n] is a positive whole number written with
+    digits only, so inputs like ["-1"], ["+5"], or ["0x10"] are rejected. *)
 let quantity n =
   if String.for_all (fun ch -> '0' <= ch && ch <= '9') n then
     match int_of_string_opt n with
@@ -17,9 +15,9 @@ let quantity n =
     | _ -> None
   else None
 
-(* [trade make c n] is [Ok (make com q)] when [c] names a commodity [com] and
-   [n] is a valid quantity [q]. Otherwise it is [Error msg] naming the bad
-   commodity, or else the bad quantity. *)
+(** [trade make c n] is [Ok (make com q)] when [c] names a commodity [com] and
+    [n] is a valid quantity [q]. Otherwise it is [Error msg] naming the bad
+    commodity, or else the bad quantity. *)
 let trade make c n =
   match (Commodity.of_string c, quantity n) with
   | None, _ -> Error ("Unknown commodity: " ^ c)
@@ -28,7 +26,9 @@ let trade make c n =
 
 let parse s =
   let words =
-    String.split_on_char ' ' (String.lowercase_ascii s)
+    String.lowercase_ascii s
+    |> String.map (fun ch -> if ch = '\t' then ' ' else ch)
+    |> String.split_on_char ' '
     |> List.filter (( <> ) "")
   in
   match words with

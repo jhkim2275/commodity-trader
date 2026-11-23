@@ -17,11 +17,6 @@ val tick_interval : float
 val now : unit -> float
 (** The current wall-clock time in seconds. *)
 
-val safe_text : (unit -> string) -> string
-(** [safe_text f] is [f ()], or a "Not implemented yet" note if [f] reaches a
-    teammate's unfinished stub ([Failure "TODO ..."]). This lets the game run
-    while parts are still being written. *)
-
 val run : Game.t ref -> Settlement.reason Lwt.t
 (** [run game] plays until the player quits, input ends, or time runs out, and
     resolves to the reason the run ended. Bot quotes keep moving while the
