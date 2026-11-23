@@ -31,6 +31,7 @@
    (>= 5.0))
   (lwt
    (>= 5.0))
-  (ounit2 :with-test))
+  (ounit2 :with-test)
+  (bisect_ppx :with-test))
  (tags
   (game trading cs3110)))

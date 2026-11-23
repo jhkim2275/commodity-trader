@@ -15,6 +15,7 @@ depends: [
   "ocaml" {>= "5.0"}
   "lwt" {>= "5.0"}
   "ounit2" {with-test}
+  "bisect_ppx" {with-test}
   "odoc" {with-doc}
 ]
 build: [
