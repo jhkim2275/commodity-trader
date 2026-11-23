@@ -7,10 +7,10 @@ open Types
 (* A fresh game with a fixed seed, so every run is the same. *)
 let new_game () = Game.create ~seed:42 ~duration:Two_min ~now:0.
 
-(* Game calls Bot, Portfolio, Clock, and [Types.string_of_price]. Until those
-   are filled in they raise [Failure "TODO ..."], so these tests are skipped
-   instead of failing [dune test] for the whole team. They run automatically
-   once every module they use is implemented. *)
+(* Game calls Bot, Portfolio, Clock, Settlement, and [Types.string_of_price].
+   Until those are filled in they raise [Failure "TODO ..."], so these tests are
+   skipped instead of failing [dune test] for the whole team. They run
+   automatically once every module they use is implemented. *)
 let deps_ready =
   try
     let g = new_game () in
@@ -24,7 +24,7 @@ let deps_ready =
 (* [test name f] is a test that is skipped until Game's dependencies exist. *)
 let test name f =
   name >:: fun _ ->
-  skip_if (not deps_ready) "waiting on Bot, Portfolio, Clock, Types";
+  skip_if (not deps_ready) "waiting on Bot, Portfolio, Clock, Settlement, Types";
   f ()
 
 let tests =
